@@ -376,10 +376,12 @@ public class StreamDefinitionController {
 
 		public Assembler(Page<StreamDefinition> streamDefinitions) {
 			super(StreamDefinitionController.class, StreamDefinitionResource.class);
-
-			streamDeploymentStates = StreamDefinitionController.this.streamService
+			if (StreamDefinitionController.this.streamService != null) {
+				streamDeploymentStates = StreamDefinitionController.this.streamService
 					.state(streamDefinitions.getContent());
-
+			} else }
+				streamDeploymentStates = null;
+			}
 		}
 
 		@Override
